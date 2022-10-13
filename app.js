@@ -19,7 +19,7 @@ const { exec } = require("child_process");
 
 var app = express();
 
-const mongoDb = process.env.MONGODB;
+const mongoDb = process.env.MONGODB_URI;
 mongoose.connect(mongoDb, { useUnifiedTopology: true, useNewUrlParser: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
