@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <%- include('header') %>
+  <body>
+    <%- include('navbar') %>
+    <div class="all-users">
+      <% if(users) { users.forEach(user => { %>
+      <a href="<%= user.url %> " class="single-user">
+        <% if (user.image.contentType === 'image/png') { %>
+        <img
+          src=" <%= `data:image/${user.image.contentType};base64,${user.image.data.toString('base64')}` %>"
+          alt=""
+          class="profile-image"
+        />
+        <% } else { %>
+        <img src="/images/empty-profile-pic.jpg" alt="" class="profile-image" />
+        <% } %>
+        <div class="full-name">
+          <h4><%= user.firstName %></h4>
+          <h4><%= user.lastName %></h4>
+        </div>
+        <div class="user-details">
+          <h5><%= user.username %></h5>
+          <h5>messages: <%= user.messages.length %></h5>
+        </div>
+      </a>
+      <% })} %>
+    </div>
+  </body>
+</html>

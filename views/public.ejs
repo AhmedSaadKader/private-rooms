@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <%- include('header') %>
+  <body>
+    <%- include('navbar') %>
+    <div class="main-grid">
+      <div class="new-message">
+        <h3 class="form-header">Post a new message</h3>
+        <% if(user) { %>
+        <form class="message-form" method="post">
+          <input type="text" name="title" placeholder="Title" id="message-form-title" />
+          <textarea type="text" name="content" placeholder="Message" id="message-form-content" maxlength="400">
+          </textarea>
+          <button>Submit</button>
+        </form>
+        <div class="user-messages">
+          <% if(user.messages) { user.messages.slice(0,3).forEach(message => { %>
+          <div class="single-message">
+            <h4><%= message.title %></h4>
+            <p><%= message.createdAt.toDateString() %> - <%= message.createdAt.toLocaleTimeString() %></p>
+          </div>
+          <% })} %>
+          <a href="/users/user-detail/<%= user._id %> ">View all messages</a>
+        </div>
+        <% } else { %>
+        <div class="log-in-request">Please <a href="/users/log-in">log-in</a> to post a new message</div>
+        <% } %>
+      </div>
+      <div class="all-messages">
+        <% if(messages) {messages.forEach(message => { %>
+        <div class="single-message">
+          <h4><%=message.title %></h4>
+
+          <% if(user) {users.forEach(user => {if (user.messages.includes(message._id)) { %>
+          <h5><%= user.firstName%></h5>
+          <% }})} else {%>
+          <h5><a href="/users/log-in">Log-in</a> to view author</h5>
+          <% } %>
+
+          <p><%= message.content %></p>
+
+          <% if(user) { %>
+          <p><%= message.createdAt.toDateString() %> - <%= message.createdAt.toLocaleTimeString() %></p>
+          <% } else { %>
+          <h5><a href="/users/log-in">Log-in</a> to view date created</h5>
+          <% } %>
+        </div>
+        <% })} %>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,48 @@
+
+.all-users {
+    margin: 10px;
+}
+
+.single-user {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    align-items: center;
+    justify-items: center;
+    /* display: flex;
+    gap: 20px;
+    max-width: 550px; */
+    text-decoration: none;
+    color: black;
+    /* padding: 5px;
+    align-items: center; */
+}
+
+.profile-image {
+    width: 50px;
+}
+
+.full-name {
+    /* min-width: 200px; */
+}
+
+.user-details {
+    /* display: flex; */
+    gap: 10px;
+}
+
+@media (max-width: 550px) {
+    .all-users {
+            margin: 5px;
+            margin-right: 8px;
+        }
+    .single-user {
+        gap: 4px;
+        justify-content: space-between;
+    }
+    .full-name {
+        min-width: 30px;
+    }
+    /* .user-details {
+        display: block;
+    } */
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <%- include('header') %>
+  <body>
+    <%- include('navbar') %>
+    <div class="user-details">
+      <div class="basic-information">
+        <% if (userDetail.image.contentType === 'image/png') { %>
+        <img
+          src=" <%= `data:image/${userDetail.image.contentType};base64,${userDetail.image.data.toString('base64')}` %>"
+          alt=""
+          class="profile-image"
+        />
+        <% } else { %>
+        <img src="/images/empty-profile-pic.jpg" alt="" class="profile-image" />
+        <% } %>
+        <div class="fullname-username">
+          <h2><%= userDetail.fullName %></h2>
+          <h2><%= userDetail.username %></h2>
+        </div>
+        <div class="delete-update">
+          <a href="/users/delete/<%= userDetail._id %> "><p>Delete Profile</p></a>
+          <a href="/users/update/<%= userDetail._id %> "><p>Update Profile</p></a>
+        </div>
+      </div>
+      <div class="messages">
+        <% userDetail.messages.forEach(message => { %>
+        <div>
+          <h2><%= message.title %></h2>
+          <p class="message-content"><%= message.content %></p>
+          <p><%= message.createdAt.toDateString() %> - <%= message.createdAt.toLocaleTimeString() %></p>
+          <hr />
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </body>
+</html>

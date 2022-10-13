@@ -6,9 +6,19 @@ const userSchema = new Schema({
   lastName: { type: String, required: true },
   username: { type: String, required: true },
   password: { type: String, required: true },
-  membership: { type: String, enum: ["Admin", "User"], required: true },
+  image: {
+    data: Buffer,
+    contentType: String,
+  },
   messages: [{ type: Schema.Types.ObjectId, ref: "Message" }],
-  rooms: [{ type: Schema.Types.ObjectId, ref: "Room" }],
+  clubs: [{ type: Schema.Types.ObjectId, ref: "Club" }],
+});
+
+userSchema.virtual("url").get(function () {
+  return `/users/user-detail/${this._id}`;
+});
+userSchema.virtual("fullName").get(function () {
+  return `${this.firstName} ${this.lastName}`;
 });
 
 module.exports = mongoose.model("User", userSchema);

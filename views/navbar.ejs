@@ -1,29 +1,39 @@
 <nav class="navbar">
-  <div class="navbar-title">
-    <a href="">Logo</a>
-  </div>
+  <div class="navbar-title"><%= title %></div>
   <a href="#" class="toggle-button">
     <span class="bar"></span>
     <span class="bar"></span>
     <span class="bar"></span>
   </a>
   <div class="navbar-links">
-    <div class="mainlink">
-      <a href="">X</a>
+    <div class="mainlink hoverable">
+      <a href="/">Home</a>
     </div>
-    <div class="mainlink">
-      <a href="">X</a>
+    <div class="mainlink hoverable">
+      <a href="/users">Users</a>
     </div>
-  </div>
-  <div class="user-div">
-    <a href="">
-      <img src="/images/professionalPhoto.jpg" alt="" />
-    </a>
-    <div>
-      <div class="user-name">Name</div>
-      <a href="">
-        <div>Sign-out</div>
+    <% if(user) { %>
+    <div class="mainlink user-div">
+      <a href="<%= user.url %>" class="profileImage">
+        <% if (user.image.contentType === 'image/png') { %>
+        <img src=" <%= `data:image/${user.image.contentType};base64,${user.image.data.toString('base64')}` %>" alt="" />
+        <% } else { %>
+        <img src="/images/empty-profile-pic.jpg" alt="" />
+        <% } %>
       </a>
+      <div class="userName">
+        <a href="<%= user.url %>">
+          <div class="user-name hoverable"><%= user.firstName %></div>
+        </a>
+        <a href="/users/log-out">
+          <div class="hoverable">Sign-out</div>
+        </a>
+      </div>
     </div>
+    <% } else { %>
+    <a href="/users/log-in" class="login-link">
+      <div class="mainlink hoverable">log-in</div>
+    </a>
+    <% } %>
   </div>
 </nav>

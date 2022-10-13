@@ -1,0 +1,22 @@
+.user-details {
+    display: grid;
+    grid-template-columns: minmax(290px, 1fr) minmax(290px, 2fr);
+    margin: 8px;
+    justify-items: center;
+}
+
+.profile-image {
+    width: 200px;
+}
+
+.message-content {
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 550px) {
+    .user-details {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(290px, 1fr))
+    }
+
+}

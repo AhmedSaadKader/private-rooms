@@ -10,8 +10,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 require("dotenv").config();
 
+const User = require("./models/user");
+
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+const mainRouter = require("./routes/main");
+const { exec } = require("child_process");
 
 var app = express();
 
@@ -26,9 +30,32 @@ app.set("view engine", "ejs");
 
 passport.use(
   new LocalStrategy((username, password, done) => {
-    User.findOne;
+    User.findOne({ username }, (err, user) => {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false, { message: "Incorrect username" });
+      }
+      if (user.password !== password) {
+        return done(null, false, { message: "Incorrect password" });
+      }
+      return done(null, user);
+    });
   })
 );
+
+passport.serializeUser(function (user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id)
+    .populate("messages")
+    .exec(function (err, user) {
+      done(err, user);
+    });
+});
 
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
@@ -42,6 +69,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/main", mainRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

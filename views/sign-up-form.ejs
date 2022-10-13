@@ -2,27 +2,37 @@
 <html lang="en">
   <%- include('header') %>
   <body>
-    <h1>Sign Up</h1>
-    <form action="" method="post" class="signUpForm">
+    <%- include('navbar') %> <% if ((path.includes("update") && !user)){ %>
+    <h1>Login to update user</h1>
+    <% } else { if ((path.includes("update") && userId.toString() !== user._id.toString())) { %>
+    <h1>You don't have access to update this user</h1>
+    <% } else if ((path.includes("update") && userId.toString()===user._id.toString())||path.includes("sign-up")){%>
+    <h1><%= title %></h1>
+    <form action="" method="post" class="signUpForm" enctype="multipart/form-data">
       <input type="text" id="firstName" name="firstName" placeholder="First Name" />
       <input type="text" id="lastName" name="lastName" placeholder="Last Name" />
+      <% if (path.includes("sign-up")) {%>
       <input type="text" id="username" name="username" placeholder="Email" />
       <input type="password" id="password" name="password" placeholder="Password" />
-      <div class="selectMembership">
-        <label for="membership">Membership</label>
-        <select id="membership" name="membership" id="membership">
-          <% for (let i = 0; i < membership.length; i++) { %>
-          <option value="<%= membership[i] %>"><%= membership[i] %></option>
-          <%} %>
-        </select>
+      <input type="password" id="passwordConfirmation" name="passwordConfirmation" placeholder="Confirm password" />
+      <% } %>
+      <div class="image-and-submit">
+        <label for="image">
+          Upload Profile Pic
+          <img src="/images/empty-profile-pic.jpg" alt="" class="form-image" />
+          <input type="file" name="image" class="input-image" id="image" />
+        </label>
+        <button>Submit</button>
       </div>
-      <button>Sign Up</button>
     </form>
-    <% if (locals.errors) { %>
+    <% }} if (locals.errors) { %>
     <ul>
       <% for (let i = 0; i < errors.length; i++) { %>
       <li><%= errors[i].msg%></li>
       <% } %> <% } %>
     </ul>
+    <% if (locals.error) { %>
+    <li><%= error %></li>
+    <% } %>
   </body>
 </html>

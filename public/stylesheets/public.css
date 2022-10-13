@@ -1,0 +1,65 @@
+.main-grid {
+    display: grid;
+    grid-template-columns: minmax(290px, 1fr) minmax(290px, 2fr);
+}
+
+.form-header {
+    margin: 5px;
+    text-align: center;
+    max-width: 550px;
+}
+
+.message-form {
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    max-width: 550px;
+    width: 95%;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    /* margin: 20px; */
+}
+
+.message-form input, textarea,
+button {
+    width: 90%;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.message-form textarea {
+    height: 90px;
+}
+
+.message-form button {
+    min-width: 100px;
+    width: 30%;
+    border: none;
+    background-color: #333;
+    color: white;
+}
+
+.log-in-request {
+    text-align: center;
+    max-width: 550px;
+}
+
+.single-message {
+    border-bottom: 1px solid black;
+    margin: 5px;
+}
+
+.single-message p {
+    overflow-wrap: break-word;
+}
+
+@media (max-width: 550px) {
+    .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr))
+        }
+    .message-form textarea {
+        height: 30px;
+    }
+}

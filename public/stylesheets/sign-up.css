@@ -1,0 +1,57 @@
+.signUpForm {
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    max-width: 550px;
+    width: 95%;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.signUpForm input,
+select,
+button {
+    width: 90%;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+}
+
+.signUpForm button {
+    min-width: 100px;
+    width: 30%;
+    border: none;
+    background-color: #333;
+    color: white;
+}
+
+.selectMembership {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.input-image {
+    display: none;
+}
+
+.form-image {
+    width: 60px;
+    cursor: pointer;
+}
+
+.image-and-submit {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    align-items: center;
+}
+
+@media (max-width: 500px) {
+    .selectMembership {
+        flex-direction: column;
+        gap: 5px;
+    }
+}

@@ -5,5 +5,15 @@
   <title><%= title %></title>
   <link rel="stylesheet" href="/stylesheets/style.css" />
   <link rel="stylesheet" href="/stylesheets/navbar.css" />
+  <% if (path.includes('sign-up') || path.includes('log-in') || path.includes('update')) { %>
+  <link rel="stylesheet" href="/stylesheets/sign-up.css" />
+  <% }; if (path.includes('public')) { %>
+  <link rel="stylesheet" href="/stylesheets/public.css" />
+  <%}; if(path.includes('users')) { %>
+  <link rel="stylesheet" href="/stylesheets/users.css" />
+  <% };if(path.includes('user-detail')) { %>
+  <link rel="stylesheet" href="/stylesheets/user-detail.css" />
+  <% }; %>
+
   <script src="/javascripts/script.js" defer></script>
 </head>
